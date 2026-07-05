@@ -18,5 +18,19 @@ app.post('/notes', async (req, res) => {
     });
 });
 
+app.get('/notes/', async (req,res) => {
+    
+    const notes = await noteModel.find(); // returns array of objects ```matching the condition (if given)``` else an empty array
+    /* 
+    const note = await noteModel.findOne({ // returns single object matching the condition else NULL
+        title: "test-title"
+    }); 
+    */
+
+    res.status(200).json({
+        message:"note fetched",
+        notes:notes
+    });
+})
 
 module.exports = app;
