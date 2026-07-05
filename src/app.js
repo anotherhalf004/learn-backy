@@ -1,52 +1,20 @@
-const express = require("express");
+const express = require('express');
+const noteModel = require('./models/note.model');
 
 const app = express();
+
 app.use(express.json());
 
-const notes = [];
-
-// POST
-app.post('/notes', (req, res) => {
-    if (!req.body) {
-        return res.status(400).json({ error: 'No request body' });
-    }
-
-    notes.push(req.body);
+// POST  -- create a note
+app.post('/notes', async (req, res) => {
+    const data = req.body; // { title , desc }
+    await noteModel.create({
+        title: data.title,
+        desc: data.desc
+    });
 
     res.status(201).json({
-        message: 'Note created',
-        note: req.body
-    });
-});
-
-//GET
-app.get('/notes',(req,res) => {
-    res.status(200).json({
-        message:"notes fetched.",
-        notes:notes
-    })
-});
-
-//DELETE
-app.delete('/notes/:idx',(req,res) => {
-    const index = req.params.idx;
-
-    delete notes [index];
-
-    res.status(200).json({
-        message:"note deleted."
-    });
-});
-
-//PATCH
-app.patch('/notes/:idx',(req,res) => {
-    const index = req.params.idx;
-    const desc = req.body.desc;
-
-    notes[index].desc = desc;
-
-    res.status(200).json({
-        message:'note updated.'
+        message: 'Note created'
     });
 });
 

@@ -1,5 +1,9 @@
+require('dotenv').config();
 const app = require('./src/app');
+const connectDB = require('./src/db/db');
 
-app.listen(2000,() => {
-    console.log('Server running on port 2000');
-})
+connectDB();
+
+app.listen(2000, () => {
+    console.log('Server is running on 2000');
+});
