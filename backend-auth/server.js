@@ -7,7 +7,6 @@ connectDB();
 
 
 
-
 app.listen(2000, () => {
     console.log('Server running on 2000');
 });
