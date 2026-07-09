@@ -1,0 +1,4 @@
+middlewares can -
+    read req-data,
+    modify data coming from the req,
+    send response
